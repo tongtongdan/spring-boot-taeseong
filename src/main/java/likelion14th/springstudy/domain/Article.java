@@ -1,4 +1,4 @@
-package likelion14th.springstudy;
+package likelion14th.springstudy.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
