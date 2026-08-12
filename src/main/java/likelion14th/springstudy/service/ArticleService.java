@@ -35,4 +35,11 @@ public class ArticleService {
                 .toList();
         return articleResponses;
     }
+    @Transactional
+    public ArticleDetailResponse patchArticle(Long Id,String title, String content){
+        Article article=articleRepository.findById(Id).orElseThrow(()->new EntityNotFoundException("해당 Id의 게시글이 없습니다"));
+        article.update(title,content);
+        articleRepository.save(article);
+        return ArticleDetailResponse.from(article);
+    }
 }

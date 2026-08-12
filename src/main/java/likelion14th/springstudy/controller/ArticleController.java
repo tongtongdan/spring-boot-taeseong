@@ -1,6 +1,7 @@
 package likelion14th.springstudy.controller;
 
 import likelion14th.springstudy.dto.request.ArticleRequest;
+import likelion14th.springstudy.dto.request.UpdateArticleRequest;
 import likelion14th.springstudy.dto.response.ApiResponse;
 import likelion14th.springstudy.dto.response.ArticleDetailResponse;
 import likelion14th.springstudy.dto.response.ArticleSummaryResponse;
@@ -34,5 +35,11 @@ public class ArticleController {
 
         ArticleDetailResponse articleDetailResponse = articleService.getArticle(id);
         return ResponseEntity.ok(ApiResponse.success(201,"게시글 조회에 성공하였습니다.", articleDetailResponse));
+    }
+
+    @PatchMapping("/{id}")
+    public ResponseEntity<ApiResponse<ArticleDetailResponse>> patchArticle(@PathVariable Long id, @RequestBody UpdateArticleRequest request){
+        ArticleDetailResponse articleDetailResponse = articleService.patchArticle(id, request.getTitle(), request.getContent());
+        return ResponseEntity.ok(ApiResponse.success(200,"게시글을 수정하였습니다.",articleDetailResponse));
     }
 }
