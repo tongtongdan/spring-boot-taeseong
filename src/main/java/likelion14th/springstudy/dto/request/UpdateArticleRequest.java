@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class UpdateArticleRequest {
     String title;
     String content;
+    String password;
 }
