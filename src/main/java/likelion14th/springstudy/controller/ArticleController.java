@@ -1,6 +1,7 @@
 package likelion14th.springstudy.controller;
 
 import likelion14th.springstudy.dto.request.ArticleRequest;
+import likelion14th.springstudy.dto.request.DeleteArticleRequest;
 import likelion14th.springstudy.dto.request.UpdateArticleRequest;
 import likelion14th.springstudy.dto.response.ApiResponse;
 import likelion14th.springstudy.dto.response.ArticleDetailResponse;
@@ -39,13 +40,13 @@ public class ArticleController {
 
     @PatchMapping("/{id}")
     public ResponseEntity<ApiResponse<ArticleDetailResponse>> patchArticle(@PathVariable Long id, @RequestBody UpdateArticleRequest request){
-        ArticleDetailResponse articleDetailResponse = articleService.patchArticle(id, request.getTitle(), request.getContent());
+        ArticleDetailResponse articleDetailResponse = articleService.patchArticle(id, request.getTitle(), request.getContent(), request.getPassword());
         return ResponseEntity.ok(ApiResponse.success(200,"게시글을 수정하였습니다.",articleDetailResponse));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<ApiResponse<Void>> deleteArticle(@PathVariable Long id){
-        articleService.deleteArticle(id);
+    public ResponseEntity<ApiResponse<Void>> deleteArticle(@PathVariable Long id, @RequestBody DeleteArticleRequest request){
+        articleService.deleteArticle(id, request.getPassword());
         return ResponseEntity.ok(ApiResponse.success(204,"게시글을 삭제하였습니다."));
     }
 }
